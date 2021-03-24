@@ -6,4 +6,5 @@ public interface Info {
    public String insertUserName = "userInsert.html";
    public String searchProductName = "productSearch.html";
    public String insertProuctWebName = "productInsert.html";
+   public String editProduct = "proudctEdit.html";
 }

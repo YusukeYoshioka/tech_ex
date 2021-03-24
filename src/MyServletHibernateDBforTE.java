@@ -22,12 +22,6 @@ public class MyServletHibernateDBforTE extends HttpServlet {
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
       response.setContentType("text/html");
-
-      // #1
-      //UtilDB.createEmployees("user3", "33");
-      //UtilDB.createEmployees("user4", "44");
-      
-      // #2
       retrieveDisplayData(response.getWriter());
    }
 

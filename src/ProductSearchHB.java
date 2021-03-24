@@ -56,6 +56,7 @@ public class ProductSearchHB extends HttpServlet implements Info
 				+ product.getProductName() + ", " //
 				+ product.getManufacturer() + "," 
 				+ product.getInventory() + "</li>");
+			//out.print("<input type=\"text\" value= \"" + product.getProductName() + "\">");
 		}
 	}
 

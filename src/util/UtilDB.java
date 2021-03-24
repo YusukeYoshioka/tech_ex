@@ -158,6 +158,68 @@ public class UtilDB {
 		return resultList;
 	}
 	
+	public static List<Product> searchProductID(String keyword)
+	{
+		List<Product> resultList = new ArrayList<Product>();
+		Session session = getSessionFactory().openSession();
+		Transaction tx = null;
+
+		try
+		{
+			tx = session.beginTransaction();
+			System.out.println((Product)session.get(Product.class, 1)); // use "get" to fetch data
+    	  // Query q = session.createQuery("FROM Employee");
+			List<?> products = session.createQuery("FROM Product").list();
+			for (Iterator<?> iterator = products.iterator(); iterator.hasNext();)
+			{
+				Product product = (Product) iterator.next();
+				if (product.getId() == Integer.valueOf(keyword))
+				{
+					resultList.add(product);
+				}
+			}
+			tx.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public static void editProductInfo(String keyword, String newName, String newManu, String newInve)
+	{
+		Session session = getSessionFactory().openSession();
+		Transaction tx = null;
+
+		try
+		{
+			tx = session.beginTransaction();
+			System.out.println((Product)session.get(Product.class, 1)); // use "get" to fetch data
+    	  // Query q = session.createQuery("FROM Employee");
+			
+			Product editProduct = (Product)session.get(Product.class, Integer.valueOf(keyword));
+			editProduct.setProductName(newName);
+			editProduct.setManufacturer(newManu);
+			editProduct.setInventroy(Integer.valueOf(newInve));
+			
+			session.update(editProduct);
+			tx.commit();
+		}
+		catch (HibernateException e)
+		{
+			if (tx != null)
+				tx.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+	
 	public static void createUser(String userName, String age, String gender, String email, String address)
 	{
 		Session session = getSessionFactory().openSession();
